@@ -12,15 +12,15 @@ packages = [
 
 
 setuptools.setup(
-    name='mastadon.py',
+    name='venera.py',
     version=__version__,
     packages=packages,
     url='https://github.com/mastadonapp/mastadon.py',
     license='MIT',
-    author='Mastadon',
+    author='Venera',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     install_requires=requirements,
-    description='Asynchronous Discord API Wrapper For Python',
+    description='Asynchronous Venera API Wrapper',
     python_requires='>=3.9',
 )
