@@ -1,2 +1,2 @@
-# mastadon.py
-Pythonic Mastadon User Library.
+# venera.py
+Pythonic API Wrapper for Venera.
