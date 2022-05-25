@@ -93,7 +93,7 @@ class HTTPClient:
         return await r.json()
 
     async def get_user(self, user_id: int):
-        r = await self.request('GET', f'/users/{str(user_id)}')
+        r = await self.request('GET', f'/users/{user_id}')
         return await r.json()
 
     async def edit_me(
@@ -128,7 +128,7 @@ class HTTPClient:
         try:
             r = await self.request(
                 'POST',
-                f'/users/@me/verify?utm_verification={str(code)}'
+                f'/users/@me/verify?utm_verification={code}'
             )
             return await r.json()
         except:
@@ -158,7 +158,7 @@ class HTTPClient:
         r = await self.request('PATCH', '/users/@me/meta', d)
 
     async def get_user_note(self, user_id: int):
-        r = await self.request('GET', f'/users/@me/notes/{str(user_id)}')
+        r = await self.request('GET', f'/users/@me/notes/{user_id}')
         if r.status == 404:
             return {'s': 'notfound'}
 
@@ -171,7 +171,7 @@ class HTTPClient:
     ):
         r = await self.request(
             'PUT',
-            f'/users/@me/notes/{str(user_id)}',
+            f'/users/@me/notes/{user_id}',
             {'content': content}
         )
 
@@ -187,7 +187,7 @@ class HTTPClient:
         return await r.json()
 
     async def get_guild_user_settings(self, guild_id: int):
-        r = await self.request('GET', f'/users/@me/guilds/{str(guild_id)}/meta')
+        r = await self.request('GET', f'/users/@me/guilds/{guild_id}/meta')
         return await r.json()
 
     async def edit_guild_user_settings(self, guild_id: int, muted_channels: List[int] = None):
@@ -196,7 +196,7 @@ class HTTPClient:
         if muted_channels:
             d['muted_channels'] = muted_channels
 
-        r = await self.request('PATCH', f'/users/@me/guilds/{str(guild_id)}/meta', d)
+        r = await self.request('PATCH', f'/users/@me/guilds/{guild_id}/meta', d)
 
         return await r.json()
 
@@ -236,19 +236,19 @@ class HTTPClient:
         if nsfw is not None:
             d['nsfw'] = nsfw
 
-        r = await self.request('PATCH', f'/guilds/{str(guild_id)}', d)
+        r = await self.request('PATCH', f'/guilds/{guild_id}', d)
 
         return await r.json()
 
     async def delete_guild(
         self, guild_id: int
     ):
-        r = await self.request('DELETE', f'/guilds/{str(guild_id)}')
+        r = await self.request('DELETE', f'/guilds/{guild_id}')
 
         return await r.json()
 
     async def get_guild(self, guild_id: int):
-        r = await self.request('GET', f'/guilds/{str(guild_id)}')
+        r = await self.request('GET', f'/guilds/{guild_id}')
 
         if r.status == 404:
             return {'s': 'notfound'}
@@ -263,21 +263,21 @@ class HTTPClient:
 
         r = await self.request(
             'POST',
-            f'/guilds/{str(guild_id)}/channels/{str(channel_id)}/invites',
+            f'/guilds/{guild_id}/channels/{channel_id}/invites',
             d    
         )
 
         return await r.json()
 
     async def claim_vanity(self, guild_id: int, code: str):
-        r = await self.request('PUT', f'/guilds/{str(guild_id)}/vanity?utm_vanity={code}')
+        r = await self.request('PUT', f'/guilds/{guild_id}/vanity?utm_vanity={code}')
         return await r.json()
 
     # END SECTION GUILDS #
     # START SECTION MEMBERS #
 
     async def get_member(self, guild_id: int, user_id: int):
-        r = await self.request('GET', f'/guilds/{str(guild_id)}/members/{str(user_id)}')
+        r = await self.request('GET', f'/guilds/{guild_id}/members/{user_id}')
 
         if r.status == 404:
             return {'s': 'notfound'}
@@ -285,7 +285,7 @@ class HTTPClient:
         return await r.json()
 
     async def get_members(self, guild_id: int):
-        r = await self.request('GET', f'/guilds/{str(guild_id)}/members')
+        r = await self.request('GET', f'/guilds/{guild_id}/members')
 
         return await r.json()
 
@@ -295,7 +295,7 @@ class HTTPClient:
         if nick:
             d['nick'] = nick
 
-        r = await self.request('PATCH', f'/guilds/{str(guild_id)}/members/@me')
+        r = await self.request('PATCH', f'/guilds/{guild_id}/members/@me')
 
         return await r.json()
 
@@ -316,7 +316,7 @@ class HTTPClient:
 
         r = await self.request(
             'PATCH',
-            f'/guilds/{str(guild_id)}/members/{str(member_id)}/nick',
+            f'/guilds/{guild_id}/members/{member_id}/nick',
             d
         )
 
@@ -326,11 +326,11 @@ class HTTPClient:
     # START SECTION AUDITS #
 
     async def get_guild_logs(self, guild_id: int):
-        r = await self.request('GET', f'/guilds/{str(guild_id)}/audits')
+        r = await self.request('GET', f'/guilds/{guild_id}/audits')
         return await r.json()
 
     async def get_guild_log(self, guild_id: int, log_id: int):
-        r = await self.request('GET', f'guilds/{str(guild_id)}/audits/{str(log_id)}')
+        r = await self.request('GET', f'guilds/{guild_id}/audits/{log_id}')
         return await r.json()
 
     async def create_log(
@@ -352,7 +352,7 @@ class HTTPClient:
         if object_id:
             d['object_id'] = object_id
     
-        r = await self.request('POST', f'/guilds/{str(guild_id)}/audits', d)
+        r = await self.request('POST', f'/guilds/{guild_id}/audits', d)
 
         return await r.json()
 
@@ -366,11 +366,11 @@ class HTTPClient:
         raise NotImplementedError
 
     async def get_role(self, guild_id: int, role_id: int):
-        r = await self.request('GET', f'/guilds/{str(guild_id)}/roles/{str(role_id)}')
+        r = await self.request('GET', f'/guilds/{guild_id}/roles/{role_id}')
         return await r.json()
 
     async def get_roles(self, guild_id: int):
-        r = await self.request('GET', f'/guilds/{str(guild_id)}/roles')
+        r = await self.request('GET', f'/guilds/{guild_id}/roles')
         return await r.json()
 
     # END SECTION ROLES #
@@ -396,7 +396,7 @@ class HTTPClient:
             d['slowmode_timeout'] = slowmode_timeout
     
         r = await self.request(
-            'POST', f'/guilds/{str(guild_id)}/channels'
+            'POST', f'/guilds/{guild_id}/channels'
         )
 
         return await r.json()
@@ -433,21 +433,21 @@ class HTTPClient:
             d['parent_id'] = parent_id
 
         r = await self.request(
-            'PATCH', f'/guilds/{str(guild_id)}/channels/{str(channel_id)}', d
+            'PATCH', f'/guilds/{guild_id}/channels/{channel_id}', d
         )
 
         return await r.json()
 
     async def delete_channel(self, guild_id: int, channel_id: int):
-        r = await self.request('DELETE', f'/guilds/{str(guild_id)}/channels/{str(channel_id)}')
+        r = await self.request('DELETE', f'/guilds/{guild_id}/channels/{channel_id}')
         return await r.json()
 
     async def get_channel(self, guild_id: int, channel_id: int):
-        r = await self.request('GET', f'/guilds/{str(guild_id)}/channels/{str(channel_id)}')
+        r = await self.request('GET', f'/guilds/{guild_id}/channels/{channel_id}')
         return await r.json()
 
     async def get_channels(self, guild_id: int):
-        r = await self.request('GET', f'/guilds/{str(guild_id)}/channels')
+        r = await self.request('GET', f'/guilds/{guild_id}/channels')
         return await r.json()
 
     # END SECTION CHANNELS #
@@ -456,13 +456,13 @@ class HTTPClient:
     async def ack_message(self, guild_id: int, channel_id: int, message_id: int):
         r = await self.request(
             'POST',
-            f'/guilds/{str(guild_id)}/channels/{str(channel_id)}/messages/{str(message_id)}/ack'
+            f'/guilds/{guild_id}/channels/{channel_id}/messages/{message_id}/ack'
         )
         return await r.json()
 
     async def get_readstate(self, guild_id: int, channel_id: int):
         r = await self.request(
-            'GET', f'/guilds/{str(guild_id)}/channels/{str(channel_id)}/readstate'
+            'GET', f'/guilds/{guild_id}/channels/{channel_id}/readstate'
         )
         return await r.json()
 
@@ -476,14 +476,14 @@ class HTTPClient:
     async def get_message(self, guild_id: int, channel_id: int, message_id: int):
         r = await self.request(
             'GET',
-            f'/guilds/{str(guild_id)}/channels/{str(channel_id)}/messages/{str(message_id)}'
+            f'/guilds/{guild_id}/channels/{channel_id}/messages/{message_id}'
         )
         return await r.json()
 
     async def get_messages(self, guild_id: int, channel_id: int):
         r = await self.request(
             'GET',
-            f'/guilds/{str(guild_id)}/channels/{str(channel_id)}/messages'
+            f'/guilds/{guild_id}/channels/{channel_id}/messages'
         )
         return await r.json()
 
@@ -502,7 +502,7 @@ class HTTPClient:
             d['referenced_message_id'] = referenced_message_id
 
         r = await self.request(
-            'POST', f'/guilds/{str(guild_id)}/channels/{str(channel_id)}/messages', d
+            'POST', f'/guilds/{guild_id}/channels/{channel_id}/messages', d
         )
 
         return await r.json()
@@ -520,20 +520,20 @@ class HTTPClient:
             d['content'] = content
 
         r = await self.request(
-            'PATCH', f'/guilds/{str(guild_id)}/channels/{str(channel_id)}/messages/{str(message_id)}'
+            'PATCH', f'/guilds/{guild_id}/channels/{channel_id}/messages/{message_id}'
         )
         return await r.json()
 
     async def delete_message(self, guild_id: int, channel_id: int, message_id: int):
-        r = await self.request('DELETE', f'/guilds/{str(guild_id)}/channels/{channel_id}/messages/{message_id}')
+        r = await self.request('DELETE', f'/guilds/{guild_id}/channels/{channel_id}/messages/{message_id}')
         return await r.json()
 
     async def pin(self, guild_id: int, channel_id: int, message_id: int):
-        r = await self.request('POST', f'/guilds/{str(guild_id)}/channels/{str(channel_id)}/pins/{str(message_id)}')
+        r = await self.request('POST', f'/guilds/{guild_id}/channels/{channel_id}/pins/{message_id}')
         return await r.json()
 
     async def unpin(self, guild_id: int, channel_id: int, message_id: int):
-        r = await self.request('DELETE', f'/guilds/{str(guild_id)}/channel/{str(channel_id)}/pins/{str(message_id)}')
+        r = await self.request('DELETE', f'/guilds/{guild_id}/channel/{channel_id}/pins/{message_id}')
         return await r.json()
 
     # END SECTION MESSAGES #
