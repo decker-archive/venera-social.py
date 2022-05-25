@@ -15,7 +15,7 @@ setuptools.setup(
     name='venera.py',
     version=__version__,
     packages=packages,
-    url='https://github.com/mastadonapp/mastadon.py',
+    url='https://github.com/veneralab/venera.py',
     license='MIT',
     author='Venera',
     long_description=open('README.md').read(),
