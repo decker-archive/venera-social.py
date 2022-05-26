@@ -10,7 +10,7 @@ class HTTPClient:
         self._token = token
         self._headers = {
             'Authorization': token,
-            'User-Agent': 'Mastadon Python Library'
+            'User-Agent': 'venera.py'
         }
         self._session = None
         self._base_url = 'https://concord.chat/api/v5'

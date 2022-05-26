@@ -7,7 +7,7 @@ with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
 packages = [
-    'mastadonlib'
+    'venera'
 ]
 
 
